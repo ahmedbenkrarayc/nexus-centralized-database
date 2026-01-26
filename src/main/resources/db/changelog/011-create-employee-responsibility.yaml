@@ -1,0 +1,83 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011
+      author: AhmedBenkrara
+      changes:
+        - createTable:
+            tableName: employee_responsibility
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: responsible_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: employee_responsibility
+            baseColumnNames: responsible_id
+            referencedTableName: employee
+            referencedColumnNames: id
+            constraintName: fk_employee_responsibility_responsible
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: employee_responsibility
+            baseColumnNames: employee_id
+            referencedTableName: employee
+            referencedColumnNames: id
+            constraintName: fk_employee_responsibility_employee
+            onDelete: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: employee_responsibility
+            constraintName: fk_employee_responsibility_responsible
+        - dropForeignKeyConstraint:
+            baseTableName: employee_responsibility
+            constraintName: fk_employee_responsibility_employee
+        - dropTable:
+            tableName: employee_responsibility
