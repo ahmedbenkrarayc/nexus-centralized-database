@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006
+      author: AhmedBenkrara
+      changes:
+        - createTable:
+            tableName: campus
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timezone
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: organization_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: campus
+            baseColumnNames: organization_id
+            referencedTableName: organization
+            referencedColumnNames: id
+            constraintName: fk_campus_organization
+            onDelete: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+              baseTableName: campus
+              constraintName: fk_campus_organization
+        - dropTable:
+            tableName: campus
