@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: created_by
+                  name: created_by_employee_id
                   type: BIGINT
                   constraints:
                     nullable: false

@@ -20,7 +20,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: VARCHAR(1000)
+                  type: TEXT
                   constraints:
                     nullable: true
               - column:
@@ -39,7 +39,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: sponsor_employee
+                  name: sponsor_employee_id
                   type: BIGINT
                   constraints:
                     nullable: true
@@ -48,7 +48,7 @@ databaseChangeLog:
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
-                  defaultValue: DRAFT
+                  defaultValue: PLANNED
               - column:
                   name: created_at
                   type: TIMESTAMP

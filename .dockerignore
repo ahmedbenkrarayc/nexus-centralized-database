@@ -1,0 +1,31 @@
+# Build output
+/target/
+
+# Local Maven cache and wrapper cache
+.mvn/repository/
+
+# VCS
+.git
+.gitignore
+
+# IDE/editor files
+.idea/
+.vscode/
+*.iml
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files not needed inside build context
+docker-compose*.yml
+docker-compose*.yaml
