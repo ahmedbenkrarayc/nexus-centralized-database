@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010
+      author: AhmedBenkrara
+      changes:
+        - createTable:
+            tableName: employee_skill
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: skill_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: level
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: employee_skill
+            baseColumnNames: employee_id
+            referencedTableName: employee
+            referencedColumnNames: id
+            constraintName: fk_employee_skill_employee
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: employee_skill
+            baseColumnNames: skill_id
+            referencedTableName: skill
+            referencedColumnNames: id
+            constraintName: fk_employee_skill_skill
+            onDelete: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: employee_skill
+            constraintName: fk_employee_skill_employee
+        - dropForeignKeyConstraint:
+            baseTableName: employee_skill
+            constraintName: fk_employee_skill_skill
+        - dropTable:
+            tableName: employee_skill
